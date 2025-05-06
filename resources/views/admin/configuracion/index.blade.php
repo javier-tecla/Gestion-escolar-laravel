@@ -31,10 +31,84 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-university"></i></span>
                                                 </div>
-                                                <input type="text" class="form-control" value="{{ old('nombre', $configuracion->nombre ?? '') }}" name="nombre" placeholder="Escriba aquí..." required>
+                                                <input type="text" class="form-control"
+                                                    value="{{ old('nombre', $configuracion->nombre ?? '') }}" name="nombre"
+                                                    placeholder="Escriba aquí..." required>
                                             </div>
                                             @error('nombre')
-                                            <small style="color: red">{{$message}}</small>
+                                                <small style="color: red">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="">Descripción</label><b> (*)</b>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-align-left"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control"
+                                                    value="{{ old('nombre', $configuracion->descripcion ?? '') }}"
+                                                    name="descripcion" placeholder="Escriba aquí..." required>
+                                            </div>
+                                            @error('descripcion')
+                                                <small style="color: red">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Dirección</label><b> (*)</b>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                </div>
+                                                <input class="form-control"
+                                                    value="{{ old('direccion', $configuracion->direccion ?? '') }}"
+                                                    name="direccion" placeholder="Escriba aquí..." required>
+                                            </div>
+                                            @error('direccion')
+                                                <small style="color: red">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Telefono</label><b> (*)</b>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                </div>
+                                                <input class="form-control"
+                                                    value="{{ old('direccion', $configuracion->telefono ?? '') }}"
+                                                    name="telefono" placeholder="Escriba aquí..." required>
+                                            </div>
+                                            @error('telefono')
+                                                <small style="color: red">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Divisa</label><b> (*)</b>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+                                                </div>
+                                               <select name="" id="" class="form-control" required>
+                                                <option value="">Seleccione una opción</option>
+                                                @foreach ($divisas as $divisa)
+                                                    <option value="{{ $divisa['symbol'] }}" {{ old('divisa', $cofiguracion->divisa ?? '') == $divisa['symbol'] ? 'selected' : '' }}>
+                                                        {{ $divisa['name']." (".$divisa['symbol'].")" }}
+                                                    </option>
+                                                @endforeach
+                                               </select>
+                                            </div>
+                                            @error('divisa')
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
