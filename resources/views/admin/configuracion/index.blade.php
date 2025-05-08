@@ -22,14 +22,15 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Logo de la institución</label><b> (*)</b>
+                                    <label for="">Logo de la institución</label>
+
                                     <input type="file" class="form-control"
-                                        value="{{ old('logo', $configuracion->logo ?? '') }}" name="nombre"
+                                        value="{{ old('logo', $configuracion->logo ?? '') }}" name="logo"
                                         placeholder="Escriba aquí..." onchange="mostrarImagen(event)" accept="image/*"
-                                        required>
+                                        >
                                     <br>
                                     <center>
-                                        <img id="preview" style="max-width: 200px; margin-top: 10px;">
+                                        <img id="preview" src="{{ url($configuracion->logo) }}" style="max-width: 200px; margin-top: 10px;">
                                     </center>
                                     @error('logo')
                                         <small style="color: red">{{ $message }}</small>
@@ -118,11 +119,11 @@
                                                     <span class="input-group-text"><i
                                                             class="fas fa-money-bill-wave"></i></span>
                                                 </div>
-                                                <select name="" id="" class="form-control" required>
+                                                <select name="divisa" id="" class="form-control" required>
                                                     <option value="">Seleccione una opción</option>
                                                     @foreach ($divisas as $divisa)
                                                         <option value="{{ $divisa['symbol'] }}"
-                                                            {{ old('divisa', $cofiguracion->divisa ?? '') == $divisa['symbol'] ? 'selected' : '' }}>
+                                                            {{ old('divisa', $configuracion->divisa ?? '') == $divisa['symbol'] ? 'selected' : '' }}>
                                                             {{ $divisa['name'] . ' (' . $divisa['symbol'] . ')' }}
                                                         </option>
                                                     @endforeach
@@ -170,27 +171,26 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <hr>
 
-                            <hr>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <a href="{{ url('/admin/') }}" class="btn btn-default"><i
-                                                class="fas fa-arrow-left"></i>
-                                            Cancelar</a>
-                                        <button type="submit" class="btn btn-primary"><i
-                                                class="fas fa-save"></i>Guardar</button>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <a href="{{ url('/admin/') }}" class="btn btn-default"><i
+                                            class="fas fa-arrow-left"></i>Cancelar</a>
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="fas fa-save"></i>Guardar</button>
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
-                <!-- /.card-body -->
+                </form>
             </div>
-            <!-- /.card -->
+            <!-- /.card-body -->
         </div>
+        <!-- /.card -->
+    </div>
     </div>
 @stop
 
