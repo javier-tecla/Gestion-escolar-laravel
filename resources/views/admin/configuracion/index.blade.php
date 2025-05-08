@@ -17,10 +17,28 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{ url('/admin/configuracion/create') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col-md-4">
-                                abc
+                                <div class="form-group">
+                                    <label for="">Logo de la institución</label><b> (*)</b>
+                                    <input type="file" class="form-control"
+                                        value="{{ old('logo', $configuracion->logo ?? '') }}" name="nombre"
+                                        placeholder="Escriba aquí..." onchange="mostrarImagen(event)" accept="image/*"
+                                        required>
+                                    <br>
+                                    <center>
+                                        <img id="preview" style="max-width: 200px; margin-top: 10px;">
+                                    </center>
+                                    @error('logo')
+                                        <small style="color: red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <script>
+                                    const mostrarImagen = e =>
+                                        document.getElementById('preview').src = URL.createObjectURL(e.target.files[0]);
+                                </script>
                             </div>
                             <div class="col-md-8">
                                 <div class="row">
@@ -64,7 +82,8 @@
                                             <label for="">Dirección</label><b> (*)</b>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-map-marker-alt"></i></span>
                                                 </div>
                                                 <input class="form-control"
                                                     value="{{ old('direccion', $configuracion->direccion ?? '') }}"
@@ -96,21 +115,72 @@
                                             <label for="">Divisa</label><b> (*)</b>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+                                                    <span class="input-group-text"><i
+                                                            class="fas fa-money-bill-wave"></i></span>
                                                 </div>
-                                               <select name="" id="" class="form-control" required>
-                                                <option value="">Seleccione una opción</option>
-                                                @foreach ($divisas as $divisa)
-                                                    <option value="{{ $divisa['symbol'] }}" {{ old('divisa', $cofiguracion->divisa ?? '') == $divisa['symbol'] ? 'selected' : '' }}>
-                                                        {{ $divisa['name']." (".$divisa['symbol'].")" }}
-                                                    </option>
-                                                @endforeach
-                                               </select>
+                                                <select name="" id="" class="form-control" required>
+                                                    <option value="">Seleccione una opción</option>
+                                                    @foreach ($divisas as $divisa)
+                                                        <option value="{{ $divisa['symbol'] }}"
+                                                            {{ old('divisa', $cofiguracion->divisa ?? '') == $divisa['symbol'] ? 'selected' : '' }}>
+                                                            {{ $divisa['name'] . ' (' . $divisa['symbol'] . ')' }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             @error('divisa')
                                                 <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Correo Electronico</label><b> (*)</b>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                </div>
+                                                <input class="form-control"
+                                                    value="{{ old('direccion', $configuracion->correo_electronico ?? '') }}"
+                                                    name="correo_electronico" placeholder="Escriba aquí..." required>
+                                            </div>
+                                            @error('correo_electronico')
+                                                <small style="color: red">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Sitio Web</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                                                </div>
+                                                <input class="form-control"
+                                                    value="{{ old('direccion', $configuracion->web ?? '') }}"
+                                                    name="web" placeholder="Escriba aquí...">
+                                            </div>
+                                            @error('web')
+                                                <small style="color: red">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <a href="{{ url('/admin/') }}" class="btn btn-default"><i
+                                                class="fas fa-arrow-left"></i>
+                                            Cancelar</a>
+                                        <button type="submit" class="btn btn-primary"><i
+                                                class="fas fa-save"></i>Guardar</button>
                                     </div>
                                 </div>
                             </div>
